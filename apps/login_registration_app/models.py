@@ -70,7 +70,7 @@ class User(models.Model):
     last_name=models.CharField(max_length=25)
     email=models.CharField(max_length=35)
     birthday=models.DateTimeField()
-    password=models.CharField(max_length=25)
+    password=models.CharField(max_length=80)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
 
