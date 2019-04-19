@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log in</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        p.flash {
+            color: red;
+            font-size: 12px;
+            display: block;
+        }
+    </style>
+    <!-- <script type="text/javascript">
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script> -->
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <h2 class="col-10">Login and Registration</h2>
+        <div class="row">
+            <div class="col">
+
+                <!-- Registration starts here -->
+                <h4 class="col-10">Register here!</h4>
+
+                <form action="/register" method="post">
+                    {%csrf_token%}
+                    <div class="col-10">
+                        <label for="first_name"> First Name: </label>
+                        {%if messages%}
+                        {%for i in messages%}
+                        {%if i.extra_tags == 'first_name'%}
+                        <p class='flash'>{{i}}</p>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+                        <div class="input-group mb-3">
+                            <input id="first_name" type="text" aria-label="First name" class="form-control"
+                                placeholder="First Name" name="first_name">
+                        </div>
+
+                        <label for="last_name"> Last Name: </label>
+                        {%if messages%}
+                        {%for i in messages%}
+                        {%if i.extra_tags == 'last_name'%}
+                        <p class='flash'>{{i}}</p>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+                        <div class="input-group mb-3">
+                            <input type="text" aria-label="last_name" class="form-control" placeholder="Last Name"
+                                name="last_name">
+                        </div>
+
+
+                        <label for="email"> Email: </label>
+                        {%if messages%}
+                        {%for i in messages%}
+                        {%if i.extra_tags == 'email'%}
+                        <p class='flash'>{{i}}</p>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+
+                        <div class="input-group mb-3">
+                            <input id="email" type="text" aria-label="email" class="form-control"
+                                placeholder="example@email.com" name="email">
+
+                        </div>
+
+                        <label for="birthday"> Birthday: </label>
+                        {%if messages%}
+                        {%for i in messages%}
+                        {%if i.extra_tags == 'birthday'%}
+                        <p class='flash'>{{i}}</p>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+                        <div class="input-group mb-3">
+                            <input id="birthday" type="date" aria-label="birthday" class="form-control" name="birthday">
+
+                        </div>
+
+                        <label for="password">Password:</label>
+                        {%if messages%}
+                        {%for i in messages%}
+                        {%if i.extra_tags == 'password'%}
+                        <p class='flash'>{{i}}</p>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+                        <div class="input-group mb-3" id="show_hide_password">
+                            <input class="form-control" type="password" name="password">
+
+                        </div>
+
+                        <label for="password_re">Confirm password</label>
+                        {%if messages%}
+                        {%for i in messages%}
+                        {%if i.extra_tags == 'password_re'%}
+                        <p class='flash'>{{i}}</p>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+                        <div class="input-group mb-3" id="show_hide_password">
+                            <input class="form-control" type="password" name="password_re">
+
+                        </div>
+                    </div>
+
+
+                    <div class="container-fluid">
+                        <div class=" mb-3">
+                            <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                    </div>
+                </form>
+                <div>
+                    <a class="col-10 d-block  d-md-none" href="/">go to log in</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <!-- Log in starts here -->
+                <h4 class="col-10">Login here!</h4>
+
+                <form action="/login" method="post">
+                    {%csrf_token%}
+                    <div class="col-10">
+
+
+                        <label for="email"> Email: </label>
+                        {%if messages%}
+                        {%for i in messages%}
+                        {%if i.extra_tags == 'email_login'%}
+                        <p class='flash'>{{i}}</p>
+                        {%endif%}
+                        {%endfor%}
+                        {%endif%}
+                        <div class="input-group mb-3">
+                            <input id="email" type="text" aria-label="email" class="form-control"
+                                placeholder="example@email.com" name="email">
+                        </div>
+
+
+
+                        <label for="password">Password:</label>
+
+                        <div class="input-group mb-3" id="show_hide_password">
+                            <input class="form-control" type="password" name="password">
+                            <!-- <div class="input-group-addon">
+                            <a href=""><i class="fa fa-eye-slash" aria-hidden="true"></i></a>
+                        </div> -->
+                        </div>
+
+
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class=" mb-3">
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+
+
+
+
+        </div>
+
+        <!-- <form action="\process" method="post">
+                    <title>Email Validation</title>
+                    Email Address: <input type="text" name="email">
+                    <br>
+                    <br>
+                    <input class="btn btn-primary" type="submit" value="Submit">
+                    </form> -->
+
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>my favorites</title>
+</head>
+
+<body>
+    <h1> see your favs</h1>
+    {%for book in my_favs%}
+    <p>Book name: {{book.title}}</p>
+    <p>Book Descriptions: {{book.desc}}</p>
+    <p>Book added by: {{book.creater.first_name}} {{book.creater.last_name}}</p>
+    <p>Book added on: {{book.created_at}}</p>
+    <p>Book updated on: {{book.updated_at}}</p>
+    <P>--------------------------------------------------------------</P>
+
+    {%endfor%}
+</body>
+
+</html>

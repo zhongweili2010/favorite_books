@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <titl>Favorite Books</titl>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        p.flash{
+            color:red;
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/books/myfav">look at my favorite books</a><br>
+    <a href="/logout">Log Out</a>
+    <h1>Welcome {{name}}</h1>
+
+    <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2>{{the_book.title}}</h2>
+                {%if this_user == the_book.creater %}
+                <form action="/books/update_book" method="POST">
+                    {%csrf_token%}
+                <input type="hidden" name="book_id" value="{{the_book.id}}">
+                {%if messages%}
+                {%for i in messages%}
+                {%if i.extra_tags == 'title'%}
+                <p class='flash'>{{i}}</p>
+                {%endif%}
+                {%endfor%}
+                {%endif%}
+                <input type="text" name="title" value="{{the_book.title}}">
+                <p> Added by: {{the_book.creater.first_name}} {{the_book.creater.last_name}}</p>
+                <p> Added on: {{the_book.created_at}}</p>
+                <p> Last updated on: {{the_book.updated_at}}</p>
+                <p>Description:</p>
+                {%if messages%}
+                {%for i in messages%}
+                {%if i.extra_tags == 'desc'%}
+                <p class='flash'>{{i}}</p>
+                {%endif%}
+                {%endfor%}
+                {%endif%}
+                <textarea name="desc">{{the_book.desc}}</textarea>
+                <button type="submit">Update</button>
+                <button href="/delete/{{the_book.id}}">delete</button>
+
+                </form>
+
+                {%else%}
+                <p> Added by: {{the_book.creater.first_name}} {{the_book.creater.last_name}}</p>
+                <p> Added on: {{the_book.created_at}}</p>
+                <p> Last updated on: {{the_book.updated_at}}</p>
+                <p>Description: {{the_book.desc}}</p>
+                {%endif%}
+
+            
+          </div>
+          <div class="col">
+           <h2>Users Who Like This Book:</h2>
+
+
+           <!-- not tested block -->
+            <ul>
+                    {%for pep in the_book.favorites.all %}
+                    
+                        <li>{{pep.first_name}} {{pep.last_name}}
+
+                            {% if pep.id == user_id %}
+                            <a href="/books/unfav/{{the_book.id}}">Un-Favorite</a>
+
+                            
+
+                            {%endif%}
+                        </li>
+                    {%endfor%}
+            </ul>
+            <!-- not tested block -->
+            {% if this_user not in the_book.favorites.all%}
+            <a href="/books/add_fav/{{the_book.id}}">Add to Favorites</a>
+            {%endif%}
+            <br>
+
+
+            <a href="/books">go back</a>
+          </div>
+    </div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
